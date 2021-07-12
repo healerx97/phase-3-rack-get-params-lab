@@ -1,6 +1,7 @@
 class Application
 
   @@items = ["Apples","Carrots","Pears"]
+  @@cart = ["Carrots"]
 
   def call(env)
     resp = Rack::Response.new
@@ -20,7 +21,7 @@ class Application
       end
     elsif req.path.match(/add/)
       param = req.params["item"]
-      if @@items.include?(param)
+      if @@items.include? param
         @@cart << param
         resp.write "added #{param}"
       else
